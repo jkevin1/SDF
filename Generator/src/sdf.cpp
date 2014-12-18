@@ -29,7 +29,7 @@ Source::Source(const char* filename, bool(*isInside)(int)) {
 
 	for (unsigned y = 0; y < height; y++)
 		for (unsigned x = 0; x < width; x++)
-			inside[y*width + x] = isInside(*(int*)&data[4*y*width + 4*x + 3]);
+			inside[y*width + x] = isInside(*(int*)&data[4*y*width + 4*x]);
 }
 
 Source::~Source() {
@@ -46,7 +46,7 @@ float Source::calcDistance(float u, float v, float range) const {
 	int ymax = min(yc + r, int(height));
 
 	bool in = inside[yc*width + xc];
-	int dist = 2 * r * r;
+	int dist = r * r;
 	for (int x = xmin; x < xmax; x++) {
 		for (int y = ymin; y < ymax; y++) {
 			if (x == xc && y == yc) continue;
@@ -59,7 +59,7 @@ float Source::calcDistance(float u, float v, float range) const {
 		}
 	}
 
-	float val = sqrtf(float(dist) / float(2*r*r));
+	float val = sqrtf(float(dist) / float(r * r));
 	if (!in) val = -val;
 	return (val + 1.0f) / 2.0f;
 }
