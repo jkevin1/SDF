@@ -4,4 +4,6 @@
 *.pdb
 Generator/Debug/
 Generator/Release/
+Renderer/Debug/
+Renderer/Release/
 *.opensdf
