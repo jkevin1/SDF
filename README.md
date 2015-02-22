@@ -9,7 +9,7 @@ Rendering text using signed distance field technique
 ![output](https://raw.github.com/jkevin1/SDF/master/Renderer/output.png)
 
 Rendering text with an outline
-![output](https://raw.github.com/jkevin1/SDF/master/Renderer/outline.png)
+![output](https://raw.github.com/jkevin1/SDF/master/Renderer/outlined.png)
 
 How the texture actually looks
 ![output](https://raw.github.com/jkevin1/SDF/master/Renderer/source.png)
@@ -17,5 +17,5 @@ How the texture actually looks
 What a 1024x1024 texture would look like without this technique
 ![output](https://raw.github.com/jkevin1/SDF/master/Renderer/equivalent.png)
 
-Generator creates images like this using all available cores, this is the texture used in the above renderings
+Generator creates images like this using all available cores, this is the texture used in the above renderings, it was generated from Generator/test.png (a 4096x4096 image)
 ![output](https://raw.github.com/jkevin1/SDF/master/Renderer/font.png)
