@@ -90,12 +90,14 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\FPSCounter.h" />
     <ClInclude Include="include\GLUtil.h" />
     <ClInclude Include="include\lodepng.h" />
     <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\FPSCounter.cpp" />
     <ClCompile Include="src\GLUtil.cpp" />
     <ClCompile Include="src\lodepng.cpp" />
     <ClCompile Include="src\main.cpp" />

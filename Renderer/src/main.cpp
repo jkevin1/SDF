@@ -1,6 +1,7 @@
 #include "WindowManager.h"
 #include "GLUtil.h"
 #include "Texture.h"
+#include "FPSCounter.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <stdio.h>
@@ -14,6 +15,8 @@ float vertices[] = {
 
 struct AppData {
 	GLFWwindow* window;
+
+	FPSCounter fps;
 
 	GLuint shaderID;
 	GLint mvpID, modeID;
@@ -48,6 +51,9 @@ static void keyCallback(GLFWwindow *window, int key, int scancode, int action, i
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
+	if (action == GLFW_PRESS && key == GLFW_KEY_F) {
+		printf("%.1ffps (%fms)\n", app->fps.getAverageFPS(), app->fps.getAverageFrameTime());
+	}
 }
 
 int main(int argc, char* argv[]) {
@@ -69,30 +75,15 @@ int main(int argc, char* argv[]) {
 
 	AppData app(window);
 
-	double prev, curr = glfwGetTime();
-	int frames = 0;
-	double time = 0.0;
-
 	while (!glfwWindowShouldClose(window)) {
-		prev = curr;
-		curr = glfwGetTime();
-
-		frames++;
-		time += curr - prev;
-		if (time > 5.0) {
-			printf("%.2ffps\n", (double(frames) / 5.0));
-			frames = 0;
-			time -= 5.0;
-		}
-
-		app.update(curr - prev);
+		app.update((float)app.fps.nextFrame());
 		app.render();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 }
 
-AppData::AppData(GLFWwindow* window) : window(window), sdf("font.png", GL_LINEAR, GL_LINEAR) {
+AppData::AppData(GLFWwindow* window) : window(window), sdf("font.png", GL_LINEAR, GL_LINEAR), fps(2.0) {
 	//Add a pointer to this struct to the window
 	glfwSetWindowUserPointer(window, this);
 	
